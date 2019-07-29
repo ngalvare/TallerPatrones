@@ -110,6 +110,7 @@ public class AtmUK {
             case 4:
                     for(Manejador m: manejadores){
                         System.out.println("The ATM have "+m.monto+" of "+m.denominacion);
+                        System.out.println("Total");
                     }
                     // Todo: mostrar el balance del ATM con los billetes en cada manejador
                     anotherTransaction(cuenta); 
