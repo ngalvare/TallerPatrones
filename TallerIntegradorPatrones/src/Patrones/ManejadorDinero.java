@@ -17,7 +17,9 @@ public class ManejadorDinero implements Manejador
         this.next = null;
     }
 
+    @Override
     public int getMonto(){ return monto; }
+    @Override
     public double getDenominacion(){ return denominacion; }
     public void setMonto(int monto){ this.monto = monto; }
     
@@ -63,6 +65,11 @@ public class ManejadorDinero implements Manejador
     @Override
     public void setNext(Manejador manejador) {
         this.next=manejador; //Setea el el viejo manejador por uno nuevo
+    }
+
+    @Override
+    public Manejador getNext() {
+        return this.next;
     }
 
   
