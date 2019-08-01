@@ -16,7 +16,7 @@ public class CuentaAdapter implements Cuenta{
     protected  Currency moneda;
 
     public CuentaAdapter(int id, double amount) {
-        Account cuenta = new Account(id,amount);
+         cuenta = new Account(id,amount);
         
     }
 

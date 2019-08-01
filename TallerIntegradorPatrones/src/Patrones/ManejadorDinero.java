@@ -24,21 +24,16 @@ public class ManejadorDinero implements Manejador {
     public double getDenominacion(){ return denominacion; }
     public void setMonto(int monto){ this.monto = monto; }
     
-     @Override
-    public Manejador crearManejador(int n, double denominacion) {
-        return new ManejadorDinero(n,denominacion);
-        
-    }
+  
 
     @Override
-    public boolean retirar(int monto) {
+    public boolean retirar(double monto) {
         if (monto == 0) {
             return true;
         }
         if (monto >= denominacion && this.monto > 0) {
-            monto -= denominacion;
             this.monto--;
-            return retirar(monto);
+            return retirar(monto-denominacion);
         } else {
             if (next != null) {
                 return next.retirar(monto);

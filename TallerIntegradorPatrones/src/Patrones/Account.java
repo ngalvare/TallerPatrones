@@ -25,7 +25,7 @@ public final class Account {
     }
      
     public Locale getLocale() {
-        return this.locale;
+        return this.locale;    
     }
      
     public String status() {

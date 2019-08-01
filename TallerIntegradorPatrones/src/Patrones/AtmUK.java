@@ -30,23 +30,30 @@ public class AtmUK {
     }
 
     public boolean sacarDinero(double dinero) {
-        this.dinero -= dinero;
-        // Todo: realizar el proceso de sacar de cada manejador la cantidad requerida
+        if (manejador.retirar(dinero)){
+            this.dinero -= dinero;
+            return true;
+        }
         return false;
+        // Todo: realizar el proceso de sacar de cada manejador la cantidad requerida
+        
     }
 
-    public boolean ingresarDinero(double dinero, int denominacion) {
-        this.dinero += dinero;
-        // Todo: Sólo se puede depositar billetes de una sola denominación y agregarse al manejador correspondiente
+    public boolean ingresarDinero(int dinero, double denominacion) {
+        if (manejador.depositar(dinero, denominacion)){
+            this.dinero += dinero * denominacion;
+            return true;
+        }
         return false;
+        
+        // Todo: Sólo se puede depositar billetes de una sola denominación y agregarse al manejador correspondiente
+        
     }
 
     public void addManejador(Manejador m) {
         if (this.manejador == null) {
             this.manejador = m;
-        } else {
-            this.manejador.setNext(m);
-        }
+        } 
     }
 
     public Manejador removeManejador(int i) throws Exception {
@@ -56,7 +63,10 @@ public class AtmUK {
             throw new Exception("No hay manejadores en el cajero");
         if (i==0){
              m = this.manejador ;
-            this.manejador= null;
+             if (this.manejador.getNext()!= null)
+                 this.manejador = this.manejador.getNext();
+             else   
+                this.manejador = null ;
             return m ;
         }
         Manejador recorre = this.manejador  ;
@@ -80,12 +90,17 @@ public class AtmUK {
             recorre= recorre.getNext();
             
         }
+        if (i > indice)
+            throw new Exception ("Indice invalido para la cantidad de Manejadores existentes ");
+            
+            
+            
         
         return m;
     }
 
     //Dentro de las transacciones se debe llamar al ATM para hacer el retiro o deposito de la cuenta correspondiente
-    public void transaction(Account cuenta) {
+    public void transaction(Cuenta cuenta) {
         // here is where most of the work is
         Scanner in = new Scanner(System.in);
         int choice;
@@ -100,12 +115,19 @@ public class AtmUK {
                 float amount;
                 System.out.println("Please enter amount to withdraw: ");
                 amount = in.nextFloat();
-                if (amount > cuenta.getAmount() || amount == 0) {
+                if (cuenta.Retirar(amount)) {
                     System.out.println("You have insufficient funds\n\n");
                     anotherTransaction(cuenta); // ask if they want another transaction
                 } else {
+                    //Verificar que se puede realizar el retiro del atm
+                    if(this.sacarDinero(amount)){
+                        System.out.println("Se han retirado "+ amount+ " y su balance actual es " + cuenta.Balance());
+                    }
+                    else{
+                        System.out.println(" Lo sentimos, el cajero no tiene la cantidad solicitada ");
+                    }
+                        
 
-                    // Todo: verificar que se puede realizar el retiro del atm
                     // Todo: actualizar tanto la cuenta como el atm y de los manejadores
                     // cuenta.retirar(amount);
                     // AtmUK.sacarDinero(amount);
@@ -119,14 +141,17 @@ public class AtmUK {
                 float deposit;
                 System.out.println("Please enter amount you would wish to deposit: ");
                 deposit = in.nextFloat();
+               
+                
                 // Todo: actualizar tanto la cuenta como el atm
-
+                
                 // Todo: Mostrar resumen de transacción o error
                 // "You have withdrawn "+amount+" and your new balance is "+balance;
+                System.out.println("Se han depositado "+ deposit+ " y su balance actual es " + cuenta.Balance());
                 anotherTransaction(cuenta);
                 break;
             case 3:
-                System.out.println("Your balance is:" + cuenta.status());
+                System.out.println("Your balance is:" + cuenta.Balance());
                 // Todo: mostrar el balance de la cuenta
                 // "Your balance is "+balance
                 anotherTransaction(cuenta);
@@ -142,10 +167,6 @@ public class AtmUK {
                     }
 
                 }
-                /*  for(Manejador m: manejadores){
-                        System.out.println("The ATM have "+m.retirar+" of "+m.denominacion);
-                        System.out.println("Total");
-                    }
                     // Todo: mostrar el balance del ATM con los billetes en cada manejador*/
                 anotherTransaction(cuenta);
                 break;
@@ -156,7 +177,7 @@ public class AtmUK {
         }
     }
 
-    public void anotherTransaction(Account cuenta) {
+    public void anotherTransaction(Cuenta cuenta) {
         System.out.println("Do you want another transaction?\n\nPress 1 for another transaction\n2 To exit");
         int transaccion;
         Scanner in = new Scanner(System.in);
