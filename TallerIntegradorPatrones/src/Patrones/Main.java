@@ -10,17 +10,20 @@ public class Main
     public static void main(String[] args) throws Exception
     {
         //Manejadores Concretos
-        Manejador m = new ManejadorDinero(100,20);
-        m.setNext(m.crearManejador(100, 20));
-        m.getNext().setNext(m.crearManejador(10, 0.50));
+        Manejador m20 = new ManejadorDinero(100,20);
+        Manejador m10 = new ManejadorDinero(100,10);
+        //Monedas en los manejadodres
+        Manejador p50 = new ManejadorDinero(10,0.50);
+        Manejador p25 = new ManejadorDinero(10,0.25);
+        Manejador p5 = new ManejadorDinero(1000,0.05);
+
+     
         
-        
-        Account cuenta = new Account(2017,3000);
-        //m20.setManejador(m10);
-        
-        AtmUK cajero = AtmUK.getInstance();
-        cajero.addManejador(m);
-        cajero.transaction(cuenta);
+        m20.setNext(m10);
+        m10.setNext(p50);;
+        p50.setNext(p25);;
+        p25.setNext(p5);
+
         
         
         
