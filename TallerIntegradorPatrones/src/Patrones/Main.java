@@ -11,8 +11,8 @@ public class Main
     {
         //Manejadores Concretos
         Manejador m = new ManejadorDinero(100,20);
-        Manejador m2 = m.crearManejador(100, 10);
-        m.setNext(m2);
+        m.setNext(m.crearManejador(100, 20));
+        m.getNext().setNext(m.crearManejador(10, 0.50));
         
         
         Account cuenta = new Account(2017,3000);
