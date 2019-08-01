@@ -11,7 +11,7 @@ public class Main
     {
         //Manejadores Concretos
         ManejadorDinero m = new ManejadorDinero(100,20);
-   
+        
         //m20.setManejador(m10);
         
         AtmUK cajero = AtmUK.getInstance();

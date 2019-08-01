@@ -11,13 +11,32 @@ import java.util.Currency;
  *
  * @author CltControl
  */
-public class cuentaAdapter {
+public class CuentaAdapter implements Cuenta{
     protected Account cuenta;
     protected  Currency moneda;
 
-    public cuentaAdapter(int id, double amount) {
+    public CuentaAdapter(int id, double amount) {
         Account cuenta = new Account(id,amount);
         
+    }
+
+    @Override
+    public double Balance() {
+        return cuenta.getAmount();
+    }
+
+    @Override
+    public boolean Retirar(double monto) {
+        if(cuenta.withdraw(monto).startsWith("Error:"))
+                return true;
+        return false;
+    }
+
+    @Override
+    public boolean Depositar(int n, double denominacion) {
+        double total = n*denominacion;
+        cuenta.deposit(total);
+        return true;
     }
     
     
