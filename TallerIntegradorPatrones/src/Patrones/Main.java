@@ -7,15 +7,20 @@ package Patrones;
 
 public class Main
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws Exception
     {
         //Manejadores Concretos
-        ManejadorDinero m = new ManejadorDinero(100,20);
+        Manejador m = new ManejadorDinero(100,20);
+        Manejador m2 = m.crearManejador(100, 10);
+        m.setNext(m2);
         
+        
+        Account cuenta = new Account(2017,3000);
         //m20.setManejador(m10);
         
         AtmUK cajero = AtmUK.getInstance();
         cajero.addManejador(m);
+        cajero.transaction(cuenta);
         
         
         

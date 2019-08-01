@@ -141,7 +141,7 @@ public class AtmUK {
                     System.out.println("El cajero no contiene billetes ");
                 } else {
                     while (m != null) {
-                        System.out.println("The ATM have " + m.getMonto() + " of " + m.getDenominacion());
+                        System.out.println("The ATM have " + m.balance());
                         m = m.getNext();
                     }
 
