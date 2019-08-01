@@ -5,7 +5,7 @@
  */
 package Patrones;
 
-import java.util.ArrayList;
+
 import java.util.Currency;
 import java.util.Locale;
 import java.util.Scanner;
@@ -14,13 +14,11 @@ public class AtmUK {
     private static AtmUK AtmUK;
     private final Currency moneda = Currency.getInstance(Locale.UK);
     private double dinero = 0;
-    private final ArrayList <Manejador> manejadores; // Cada manejador puede entregar dinero de una sola denominación
+    private  Manejador manejador = null; // Cada manejador puede entregar dinero de una sola denominación
     
     
     private AtmUK() {
-        manejadores = new ArrayList<Manejador>();
-        
-        
+      
     }
     
     
@@ -54,7 +52,10 @@ public class AtmUK {
     }
 
     public void addManejador(Manejador m){
-        manejadores.add(m);
+        if (this.manejador == null )
+            this.manejador= m;
+        else
+        this.manejador.setNext(m);
     }
     public Manejador removeManejador(int i){
         return manejadores.remove(i);
@@ -110,11 +111,14 @@ public class AtmUK {
                     anotherTransaction(cuenta); 
             break;
             case 4:
-                    for(Manejador m: manejadores){
-                        System.out.println("The ATM have "+m.monto+" of "+m.denominacion);
+                   ManejadorDinero m = new Manejador() ;
+                    if (m != null)
+                            System.out.println("The ATM have "++" of "+m.denominacion);
+                  /*  for(Manejador m: manejadores){
+                        System.out.println("The ATM have "+m.retirar+" of "+m.denominacion);
                         System.out.println("Total");
                     }
-                    // Todo: mostrar el balance del ATM con los billetes en cada manejador
+                    // Todo: mostrar el balance del ATM con los billetes en cada manejador*/
                     anotherTransaction(cuenta); 
             break;
             default:

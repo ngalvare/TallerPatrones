@@ -10,14 +10,12 @@ public class Main
     public static void main(String[] args)
     {
         //Manejadores Concretos
-        Manejador m20 = new Manejador(100,20);
-        Manejador m10 = new Manejador(100,10);
-        Manejador m5 = new Manejador(10,50);
+        ManejadorDinero m = new ManejadorDinero(100,20);
+   
         //m20.setManejador(m10);
         
         AtmUK cajero = AtmUK.getInstance();
-        
-        cajero.addManejador(m20);
+        cajero.addManejador(m);
         
         
         

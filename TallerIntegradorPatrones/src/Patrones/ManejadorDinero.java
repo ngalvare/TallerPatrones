@@ -11,15 +11,22 @@ public class ManejadorDinero implements Manejador
     protected double denominacion;
     private Manejador next;
 
-    public ManejadorDinero(int monto, int denominacion){
+    public ManejadorDinero(int monto, double denominacion){
         this.monto = monto; // Total de billetes
         this.denominacion = denominacion; // Valor de cada billete
+        this.next = null;
     }
 
     public int getMonto(){ return monto; }
     public double getDenominacion(){ return denominacion; }
     public void setMonto(int monto){ this.monto = monto; }
+    
+     @Override
+    public Manejador crearManejador(int n, double denominacion) {
+        return new ManejadorDinero(n,denominacion);
+    }
 
+    @Override
     public boolean retirar(int monto){
         if(monto==0) return true;
         if(monto>=denominacion && this.monto>0 ){
@@ -38,6 +45,7 @@ public class ManejadorDinero implements Manejador
         }
         }
     
+    @Override
     public boolean depositar(int cantidad, double denominacion){
         if(denominacion==this.denominacion){
             this.monto=(int) (this.monto + (cantidad/denominacion));
@@ -56,4 +64,6 @@ public class ManejadorDinero implements Manejador
     public void setNext(Manejador manejador) {
         this.next=manejador; //Setea el el viejo manejador por uno nuevo
     }
+
+  
 }
