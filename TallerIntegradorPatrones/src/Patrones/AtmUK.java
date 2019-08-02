@@ -113,7 +113,7 @@ public class AtmUK {
         switch (choice) {
             case 1:
                 double amount;
-                System.out.println("\nPorfavor ingresar monto a retirar: ");
+                System.out.println("\nPorfavor ingresar monto a retirar: (ingrese números enteros)");
                 amount = in.nextDouble();
                 if ((cuenta.Balance() - amount >= 0) && (this.sacarDinero(amount))) {
                     cuenta.Retirar(amount);
