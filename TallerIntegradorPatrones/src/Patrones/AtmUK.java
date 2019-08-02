@@ -104,16 +104,16 @@ public class AtmUK {
         // here is where most of the work is
         Scanner in = new Scanner(System.in);
         int choice;
-        System.out.println("Please select an option");
-        System.out.println("1. Withdraw");
-        System.out.println("2. Deposit");
+        System.out.println("Porfavor eliga una opción");
+        System.out.println("1. Retirar");
+        System.out.println("2. Depositar");
         System.out.println("3. Balance");
         System.out.println("4. Balance ATM");
         choice = in.nextInt();
         switch (choice) {
             case 1:
                 float amount;
-                System.out.println("Please enter amount to withdraw: ");
+                System.out.println("Porfavor ingresar monto a retirar: ");
                 amount = in.nextFloat();
                 if ((cuenta.Balance() - amount >= 0) && (this.sacarDinero(amount))) {
                     cuenta.Retirar(amount);
@@ -122,7 +122,7 @@ public class AtmUK {
                 } else {
                     //Verificar que se puede realizar el retiro del atm
                     if(!(cuenta.Balance() - amount>=0)){
-                        System.out.println("You have insufficient funds\n\n");
+                        System.out.println("Lo sentimos, Used no tiene suficientes fondos\n\n");
                         
                     }
                     else{
@@ -141,9 +141,13 @@ public class AtmUK {
             case 2:
                 // option number 2 is depositing 
                 float deposit;
-                System.out.println("Please enter amount you would wish to deposit: ");
+                int n;
+                System.out.println("Por favor ingrese la cantidad de billetes a depositar: ");
+                n = in.nextInt();
+                System.out.println("Por favor ingrese la denomincación a depositar: ");
                 deposit = in.nextFloat();
-               
+                cuenta.Depositar(n, deposit);
+                dinero = dinero -(n*deposit);
                 
                 // Todo: actualizar tanto la cuenta como el atm
                 
@@ -153,7 +157,7 @@ public class AtmUK {
                 anotherTransaction(cuenta);
                 break;
             case 3:
-                System.out.println("Your balance is:" + cuenta.Balance());
+                System.out.println("Su Balance es:" + cuenta.Balance());
                 // Todo: mostrar el balance de la cuenta
                 // "Your balance is "+balance
                 anotherTransaction(cuenta);
@@ -164,7 +168,7 @@ public class AtmUK {
                     System.out.println("El cajero no contiene billetes ");
                 } else {
                     while (m != null) {
-                        System.out.println("The ATM have " + m.balance());
+                        System.out.println("El ATM tiene: " + m.balance());
                         m = m.getNext();
                     }
 
@@ -173,7 +177,7 @@ public class AtmUK {
                 anotherTransaction(cuenta);
                 break;
             default:
-                System.out.println("Invalid option:\n\n");
+                System.out.println("Opcion Invalida!!:\n\n");
                 anotherTransaction(cuenta);
                 break;
         }
