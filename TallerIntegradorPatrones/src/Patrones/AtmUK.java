@@ -104,7 +104,7 @@ public class AtmUK {
         // here is where most of the work is
         Scanner in = new Scanner(System.in);
         int choice;
-        System.out.println("Porfavor eliga una opción");
+        System.out.println("\nPorfavor eliga una opción: ");
         System.out.println("1. Retirar");
         System.out.println("2. Depositar");
         System.out.println("3. Balance");
@@ -113,7 +113,7 @@ public class AtmUK {
         switch (choice) {
             case 1:
                 float amount;
-                System.out.println("Porfavor ingresar monto a retirar: ");
+                System.out.println("\nPorfavor ingresar monto a retirar: ");
                 amount = in.nextFloat();
                 if ((cuenta.Balance() - amount >= 0) && (this.sacarDinero(amount))) {
                     cuenta.Retirar(amount);
@@ -126,7 +126,7 @@ public class AtmUK {
                         
                     }
                     else{
-                        System.out.println(" Lo sentimos, el cajero no tiene la cantidad solicitada ");
+                        System.out.println("Lo sentimos, el cajero no tiene la cantidad solicitada \n\n");
                     }
                         anotherTransaction(cuenta);
 
@@ -142,9 +142,9 @@ public class AtmUK {
                 // option number 2 is depositing 
                 float deposit;
                 int n;
-                System.out.println("Por favor ingrese la cantidad de billetes a depositar: ");
+                System.out.println("\nPor favor ingrese la cantidad de billetes a depositar: ");
                 n = in.nextInt();
-                System.out.println("Por favor ingrese la denomincación a depositar: ");
+                System.out.println("\nPor favor ingrese la denomincación a depositar: ");
                 deposit = in.nextFloat();
                 cuenta.Depositar(n, deposit);
                 dinero = dinero -(n*deposit);
@@ -184,7 +184,7 @@ public class AtmUK {
     }
 
     public void anotherTransaction(Cuenta cuenta) {
-        System.out.println("Do you want another transaction?\n\nPress 1 for another transaction\n2 To exit");
+        System.out.println("\nEliga una opción: \n1.Realizar otra transacción\n2.Salir");
         int transaccion;
         Scanner in = new Scanner(System.in);
         transaccion = in.nextInt();
@@ -193,10 +193,10 @@ public class AtmUK {
                 transaction(cuenta); // call transaction method
                 break;
             case 2:
-                System.out.println("Thanks for choosing us. Good Bye!");
+                System.out.println("Gracias por elegirnos,adiós!!");
                 break;
             default:
-                System.out.println("Invalid choice\n\n");
+                System.out.println("Opción Invalida\n\n");
                 anotherTransaction(cuenta);
                 break;
         }
