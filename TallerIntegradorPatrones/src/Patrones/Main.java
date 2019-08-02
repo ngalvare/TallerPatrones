@@ -12,7 +12,7 @@ public class Main
         //Cuentas US
         ArrayList<Cuenta> cuentasLista = new ArrayList<>();
         for(int i = 1; i<11;i++){
-            Cuenta cuenta = new CuentaADapter(i, i*100);
+            Cuenta cuenta = new CuentaAdapter(i, i*100);
             cuentasLista.add(cuenta);
         }
         
