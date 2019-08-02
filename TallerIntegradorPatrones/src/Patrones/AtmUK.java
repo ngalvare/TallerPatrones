@@ -115,25 +115,27 @@ public class AtmUK {
                 float amount;
                 System.out.println("Please enter amount to withdraw: ");
                 amount = in.nextFloat();
-                if (cuenta.Retirar(amount)) {
-                    System.out.println("You have insufficient funds\n\n");
+                if ((cuenta.Balance() - amount >= 0) && (this.sacarDinero(amount))) {
+                    cuenta.Retirar(amount);
+                    System.out.println("Se han retirado "+ amount+ " y su balance actual es " + cuenta.Balance());
                     anotherTransaction(cuenta); // ask if they want another transaction
                 } else {
                     //Verificar que se puede realizar el retiro del atm
-                    if(this.sacarDinero(amount)){
-                        System.out.println("Se han retirado "+ amount+ " y su balance actual es " + cuenta.Balance());
+                    if(!(cuenta.Balance() - amount>=0)){
+                        System.out.println("You have insufficient funds\n\n");
+                        
                     }
                     else{
                         System.out.println(" Lo sentimos, el cajero no tiene la cantidad solicitada ");
                     }
-                        
+                        anotherTransaction(cuenta);
 
                     // Todo: actualizar tanto la cuenta como el atm y de los manejadores
                     // cuenta.retirar(amount);
                     // AtmUK.sacarDinero(amount);
                     // Todo: Mostrar resumen de transacción o error
                     // "You have withdrawn "+amount+" and your new balance is "+balance;
-                    anotherTransaction(cuenta);
+                    
                 }
                 break;
             case 2:
