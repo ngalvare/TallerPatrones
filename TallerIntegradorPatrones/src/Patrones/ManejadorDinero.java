@@ -24,19 +24,20 @@ public class ManejadorDinero implements Manejador {
 
     @Override
     public boolean retirar(double monto) {
-        int contador=0;
+        int original = this.monto;
         if (monto == 0) {
             return true;
         }
         if (monto >= denominacion && this.monto > 0) {
-            contador++;
-            if (retirar(monto-denominacion)){ 
-            this.monto=this.monto-contador;
-            return true;
+            this.monto--;
+            if (!retirar(monto-denominacion)){ 
+              
+                this.monto=original;
+            return false;
             
             }
             
-            return false;
+            return true;
         }
         
         else {
