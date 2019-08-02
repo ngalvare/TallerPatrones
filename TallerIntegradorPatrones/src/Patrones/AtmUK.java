@@ -153,7 +153,7 @@ public class AtmUK {
                 
                 // Todo: Mostrar resumen de transacción o error
                 // "You have withdrawn "+amount+" and your new balance is "+balance;
-                System.out.println("Se han depositado "+ deposit+ " y su balance actual es " + cuenta.Balance());
+                System.out.println("Se han depositado "+ deposit*n+ " y su balance actual es " + cuenta.Balance());
                 anotherTransaction(cuenta);
                 break;
             case 3:
